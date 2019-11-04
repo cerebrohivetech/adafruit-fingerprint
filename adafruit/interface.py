@@ -52,8 +52,8 @@ class AdafruitFingerprint:
 
     # generate character file from the original image in ImageBuffer
     # and store the file in CharBuff1(id:1) and CharBuff2(id:2)
-    def img_2tz(self, buffer_id):
-        data = [0x02, buffer_id]
+    def img_2tz(self, buffer):
+        data = [0x02, buffer]
         self.package.write(data=data)
         serial_data = self.package.read()
         if len(serial_data):
@@ -76,8 +76,8 @@ class AdafruitFingerprint:
     # generate a template to be stored back in both CharBuffer1 and CharBuffer2
     def reg_model(self):
         data = [0x05]
-        self.package.write(data=data, show=True)
-        serial_data = self.package.read(show=True)
+        self.package.write(data=data, show=False)
+        serial_data = self.package.read(show=False)
         if len(serial_data):
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
@@ -86,6 +86,24 @@ class AdafruitFingerprint:
                 return FINGERPRINT_PACKETRECEIVER
             elif package_content == FINGERPRINT_ENROLLMISMATCH:
                 return FINGERPRINT_ENROLLMISMATCH
+            else:
+                raise UnknownConfirmationCodeException('Unknown confirmation code')
+        raise SerialReadException('No data read from serial port')
+
+    def up_char(self, buffer):
+        data = [0x08, buffer]
+        self.package.write(data=data, show=False)
+
+        serial_data = self.package.read(show=False)
+        if len(serial_data):
+            package_content = serial_data[4]
+            if package_content == FINGERPRINT_OK:
+                template = self.package.read_template()
+                return FINGERPRINT_OK, template
+            elif package_content == FINGERPRINT_PACKETRECEIVER:
+                return FINGERPRINT_PACKETRECEIVER
+            elif package_content == FINGERPRINT_TEMPLATEUPLOADFAIL:
+                return FINGERPRINT_TEMPLATEUPLOADFAIL
             else:
                 raise UnknownConfirmationCodeException('Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
