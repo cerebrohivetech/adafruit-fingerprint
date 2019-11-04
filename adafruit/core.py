@@ -1,4 +1,4 @@
-import sys
+import sys, binascii
 from time import sleep
 from struct import unpack, pack
 
@@ -36,6 +36,7 @@ class Package:
                 content_format = '!' + 'B' * (package_length - self.CHECKSUM_LENGTH) + 'H'
                 package.extend(unpack(content_format, serial_data))
         if show: print(f'read: {package}')
+        if show: print(f'read: {pack("!HIBH"+content_format.lstrip("!"), *package)}')
         return package
 
 
@@ -51,4 +52,15 @@ class Package:
         package = self.package_head + package_length + data + checksum
         serial_data = pack(package_format, *package)
         if show: print(f'write: {package}')
+        if show: print(f'write: {serial_data}')
         self.port.write(serial_data)
+
+    def read_template(self):
+        sleep(1)
+        if self.port.in_waiting > 0:
+            serial_data = self.port.read(self.port.in_waiting)
+            t = binascii.hexlify(serial_data)
+            # print(serial_data)
+            # print(t)
+            return t.decode()
+            # sys.exit('Ended here')
