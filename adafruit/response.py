@@ -19,4 +19,8 @@ FINGERPRINT_IMAGEMESS = int('0x06', base)
 FINGERPRINT_FEATUREFAIL = int('0x07', base)
 FINGERPRINT_INVALIDIMAGE = int('0x15', base)
 
+# reg_model responses
 FINGERPRINT_ENROLLMISMATCH = int('0x0a', base)
+
+# up_char response
+FINGERPRINT_TEMPLATEUPLOADFAIL = int('0x0d', base)
