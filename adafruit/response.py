@@ -24,3 +24,13 @@ FINGERPRINT_ENROLLMISMATCH = int('0x0a', base)
 
 # up_char response
 FINGERPRINT_TEMPLATEUPLOADFAIL = int('0x0d', base)
+
+# down_char response
+FINGERPRINT_TEMPLATEDOWNLOADFAIL = int('0x0e', base)
+
+# store response
+FINGERPRINT_BADLOCATION = int('0x0b', base)
+FINGERPRINT_FLASHER = int('0x18', base)
+
+# search response
+FINGERPRINT_NOTFOUND = int('0x09', base)
