@@ -55,12 +55,17 @@ class Package:
         if show: print(f'write: {serial_data}')
         self.port.write(serial_data)
 
-    def read_template(self):
+    def read_template(self, show=None):
         sleep(1)
         if self.port.in_waiting > 0:
             serial_data = self.port.read(self.port.in_waiting)
-            t = binascii.hexlify(serial_data)
-            # print(serial_data)
-            # print(t)
-            return t.decode()
-            # sys.exit('Ended here')
+            template = binascii.hexlify(serial_data)
+            if show: print(serial_data)
+            if show: print(template)
+            return template.decode()
+
+    def write_template(self, data, show=None):
+        sleep(1)
+        template = binascii.unhexlify(data.encode())
+        self.port.write(template)
+        if show: print(template)
