@@ -167,7 +167,7 @@ def enroll_to_flash_library(finger, id):
         print('Unknown Error')
         return response
 
-    response = finger.store(buffer=CHAR_BUFF_2, pageID=id)
+    response = finger.store(buffer=CHAR_BUFF_2, page_id=id)
     if response is FINGERPRINT_OK:
         print(f'Print stored in id #{id} of flash library\n')
         sys.stdout.flush()
