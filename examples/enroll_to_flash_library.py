@@ -31,7 +31,7 @@ def main():
 
     while True:
         print('\nReady to enroll a fingerprint!\n')
-        print('Please type in the ID # (from 1 to 127) you want to save this finger as...')
+        print('Please type in the ID # (from 1 to 255) you want to save this finger as...')
         id = read_number()
         print(f'Enrolling id #{id}\n')
         while not enroll_to_flash_library(finger, id):
@@ -39,13 +39,13 @@ def main():
 
 def read_number():
     num = 0
-    while num < 1 or num > 127:
+    while num < 1 or num > 255:
         try:
             num = int(input())
         except ValueError:
             print('Please provide an integer')
         else:
-            if num < 1 or num > 127:
+            if num < 1 or num > 255:
                 print('Please provide an integer in the above range')
 
     return num
