@@ -1,4 +1,4 @@
-class NullPortException(Exception):
+class MissingPortException(Exception):
     pass
 
 class SerialReadException(Exception):
