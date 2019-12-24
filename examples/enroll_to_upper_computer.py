@@ -31,7 +31,7 @@ def main():
 
     while True:
         print('\nReady to enroll a fingerprint!\n')
-        template = enroll_to_upper_computer(finger)
+        template = enroll_to_upper_computer(finger=finger)
         if template:
             print(f'Template:: {template}')
         else:
