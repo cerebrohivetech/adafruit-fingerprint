@@ -8,7 +8,8 @@ from adafruit_fingerprint.utils import hexbyte_2integer_normalizer
 class AdafruitFingerprint:
     def __init__(self, port=None):
         if port is None:
-            raise MissingPortException('No port passed for serial communication')
+            raise MissingPortException(
+                'No port passed for serial communication')
         self.port = port
         self.package = Package(port=port)
 
@@ -28,7 +29,8 @@ class AdafruitFingerprint:
             elif package_content == FINGERPRINT_WRONG_PASSWORD:
                 return FINGERPRINT_WRONG_PASSWORD
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
     def gen_img(self):
@@ -51,7 +53,8 @@ class AdafruitFingerprint:
             elif package_content == FINGERPRINT_IMAGEFAIL:
                 return FINGERPRINT_IMAGEFAIL
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
     def img_2Tz(self, buffer):
@@ -75,7 +78,8 @@ class AdafruitFingerprint:
             elif package_content == FINGERPRINT_INVALIDIMAGE:
                 return FINGERPRINT_INVALIDIMAGE
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
     def reg_model(self):
@@ -96,7 +100,8 @@ class AdafruitFingerprint:
             elif package_content == FINGERPRINT_ENROLLMISMATCH:
                 return FINGERPRINT_ENROLLMISMATCH
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
     def up_char(self, buffer):
@@ -118,7 +123,8 @@ class AdafruitFingerprint:
             elif package_content == FINGERPRINT_TEMPLATEUPLOADFAIL:
                 return FINGERPRINT_TEMPLATEUPLOADFAIL
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
     def down_char(self, buffer, template):
@@ -140,7 +146,8 @@ class AdafruitFingerprint:
             elif package_content == FINGERPRINT_TEMPLATEDOWNLOADFAIL:
                 return FINGERPRINT_TEMPLATEDOWNLOADFAIL
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
     def store(self, buffer, page_id):
@@ -163,7 +170,8 @@ class AdafruitFingerprint:
             elif package_content == FINGERPRINT_FLASHER:
                 return FINGERPRINT_FLASHER
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
     def search(self, buffer, page_start, page_num):
@@ -178,13 +186,16 @@ class AdafruitFingerprint:
         if len(serial_data):
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
-                page_id = hexbyte_2integer_normalizer(serial_data[5], serial_data[6])
-                confidence_score = hexbyte_2integer_normalizer(serial_data[7], serial_data[8])
+                page_id = hexbyte_2integer_normalizer(
+                    serial_data[5], serial_data[6])
+                confidence_score = hexbyte_2integer_normalizer(
+                    serial_data[7], serial_data[8])
                 return FINGERPRINT_OK, page_id, confidence_score
             elif package_content == FINGERPRINT_PACKETRECEIVER:
                 return FINGERPRINT_PACKETRECEIVER
             elif package_content == FINGERPRINT_NOTFOUND:
                 return FINGERPRINT_NOTFOUND
             else:
-                raise UnknownConfirmationCodeException('Unknown confirmation code')
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')

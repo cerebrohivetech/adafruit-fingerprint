@@ -13,7 +13,7 @@ from adafruit_fingerprint.responses import *
 def main():
     # Attempt to connect to serial port
     try:
-        port = '/dev/ttyUSB0' # USB TTL converter port
+        port = '/dev/ttyUSB0'  # USB TTL converter port
         baud_rate = '57600'
         serial_port = serial.Serial(port, baud_rate)
     except Exception as e:
@@ -22,7 +22,7 @@ def main():
 
     # Initialize sensor library with serial port connection
     finger = AdafruitFingerprint(port=serial_port)
-    
+
     response = finger.vfy_pwd()
     if response is not FINGERPRINT_PASSWORD_OK:
         print('Did not find fingerprint sensor :(')
@@ -36,6 +36,7 @@ def main():
         print(f'Enrolling id #{id}\n')
         while not enroll_to_flash_library(finger=finger, id):
             break
+
 
 def read_number():
     num = 0
@@ -54,7 +55,7 @@ def read_number():
 def enroll_to_flash_library(finger, id):
     CHAR_BUFF_1 = 0x01
     CHAR_BUFF_2 = 0x02
-    
+
     print('Waiting for a valid finger to enroll\n')
     sys.stdout.flush()
 
@@ -64,7 +65,7 @@ def enroll_to_flash_library(finger, id):
         response = finger.gen_img()
         if response is FINGERPRINT_OK:
             print('Image taken')
-            sys.stdout.flush() 
+            sys.stdout.flush()
         elif response is FINGERPRINT_NOFINGER:
             print('waiting...')
             sys.stdout.flush()
@@ -77,7 +78,7 @@ def enroll_to_flash_library(finger, id):
         else:
             print('Unknown Error')
             sys.stdout.flush()
-    
+
     response = finger.img_2Tz(buffer=CHAR_BUFF_1)
     if response is FINGERPRINT_OK:
         print('Image Converted')
@@ -114,7 +115,7 @@ def enroll_to_flash_library(finger, id):
         response = finger.gen_img()
         if response is FINGERPRINT_OK:
             print('Image taken')
-            sys.stdout.flush() 
+            sys.stdout.flush()
         elif response is FINGERPRINT_NOFINGER:
             print('waiting...')
             sys.stdout.flush()
@@ -127,7 +128,7 @@ def enroll_to_flash_library(finger, id):
         else:
             print('Unknown Error')
             sys.stdout.flush()
-    
+
     response = finger.img_2Tz(buffer=CHAR_BUFF_2)
     if response is FINGERPRINT_OK:
         print('Image Converted')

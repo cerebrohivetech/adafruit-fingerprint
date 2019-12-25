@@ -13,7 +13,7 @@ from adafruit_fingerprint.responses import *
 def main():
     # Attempt to connect to serial port
     try:
-        port = '/dev/ttyUSB0' # USB TTL converter port
+        port = '/dev/ttyUSB0'  # USB TTL converter port
         baud_rate = '57600'
         serial_port = serial.Serial(port, baud_rate)
     except Exception as e:
@@ -22,7 +22,7 @@ def main():
 
     # Initialize sensor library with serial port connection
     finger = AdafruitFingerprint(port=serial_port)
-    
+
     response = finger.vfy_pwd()
     if response is not FINGERPRINT_PASSWORD_OK:
         print('Did not find fingerprint sensor :(')
@@ -36,7 +36,7 @@ def main():
             id, confidence = response
             print(f'Found ID #{id}', end='')
             print(f' with confidence of {confidence}\n')
-        sleep(0.1) # Don't run at full speed
+        sleep(0.1)  # Don't run at full speed
 
 
 def search(finger, page_id, page_num):
@@ -50,7 +50,7 @@ def search(finger, page_id, page_num):
         response = finger.gen_img()
         if response is FINGERPRINT_OK:
             print('Image taken')
-            sys.stdout.flush() 
+            sys.stdout.flush()
         elif response is FINGERPRINT_NOFINGER:
             print('waiting...')
             sys.stdout.flush()
@@ -63,11 +63,11 @@ def search(finger, page_id, page_num):
         else:
             print('Unknown Error')
             return False
-    
+
     response = finger.img_2Tz(buffer=CHAR_BUFF_1)
     if response is FINGERPRINT_OK:
         print('Image Converted')
-        sys.stdout.flush() 
+        sys.stdout.flush()
     elif response is FINGERPRINT_IMAGEMESS:
         print('Image too messy')
         return False
@@ -84,7 +84,8 @@ def search(finger, page_id, page_num):
         print('Unknown Error')
         return False
 
-    response = finger.search(buffer=CHAR_BUFF_1, page_start=page_id, page_num=page_num)
+    response = finger.search(
+        buffer=CHAR_BUFF_1, page_start=page_id, page_num=page_num)
     if isinstance(response, tuple) and len(response) == 3 and response[0] is FINGERPRINT_OK:
         print('Found a print match!\n')
         return response[1], response[2]

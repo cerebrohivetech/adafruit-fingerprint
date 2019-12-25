@@ -39,14 +39,15 @@ class Package:
             sleep(self.WAIT_TIME)
             if self.port.in_waiting >= package_length:
                 serial_data = self.port.read(package_length)
-                content_format = '!' + 'B' * (package_length - self.CHECKSUM_LENGTH) + 'H'
+                content_format = '!' + 'B' * \
+                    (package_length - self.CHECKSUM_LENGTH) + 'H'
                 package.extend(unpack(content_format, serial_data))
         return package
 
     def write(self, data):
         ''' Write the command (or instruction) package '''
         # Get package_length
-        package_length =  [(len(data) + self.CHECKSUM_LENGTH)]
+        package_length = [(len(data) + self.CHECKSUM_LENGTH)]
 
         # Create checksum
         checksum = [sum(self.package_head[-1:] + package_length + data)]

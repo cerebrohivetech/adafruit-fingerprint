@@ -13,7 +13,7 @@ from adafruit_fingerprint.responses import *
 def main():
     # Attempt to connect to serial port
     try:
-        port = '/dev/ttyUSB0' # USB TTL converter port
+        port = '/dev/ttyUSB0'  # USB TTL converter port
         baud_rate = '57600'
         serial_port = serial.Serial(port, baud_rate)
     except Exception as e:
@@ -56,7 +56,7 @@ def enroll_to_upper_computer(finger):
         response = finger.gen_img()
         if response is FINGERPRINT_OK:
             print('Image taken')
-            sys.stdout.flush() 
+            sys.stdout.flush()
         elif response is FINGERPRINT_NOFINGER:
             print('waiting...')
             sys.stdout.flush()
@@ -69,7 +69,7 @@ def enroll_to_upper_computer(finger):
         else:
             print('Unknown Error')
             sys.stdout.flush()
-    
+
     response = finger.img_2Tz(buffer=_CHAR_BUFF_1)
     if response is FINGERPRINT_OK:
         print('Image Converted')
@@ -106,7 +106,7 @@ def enroll_to_upper_computer(finger):
         response = finger.gen_img()
         if response is FINGERPRINT_OK:
             print('Image taken')
-            sys.stdout.flush() 
+            sys.stdout.flush()
         elif response is FINGERPRINT_NOFINGER:
             print('waiting...')
             sys.stdout.flush()
@@ -119,7 +119,7 @@ def enroll_to_upper_computer(finger):
         else:
             print('Unknown Error')
             sys.stdout.flush()
-    
+
     response = finger.img_2Tz(buffer=_CHAR_BUFF_2)
     if response is FINGERPRINT_OK:
         print('Image Converted')

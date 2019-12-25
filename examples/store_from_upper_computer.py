@@ -16,7 +16,7 @@ from examples.enroll_to_upper_computer import enroll_to_upper_computer
 def main():
     # Attempt to connect to serial port
     try:
-        port = '/dev/ttyUSB0' # USB TTL converter port
+        port = '/dev/ttyUSB0'  # USB TTL converter port
         baud_rate = '57600'
         serial_port = serial.Serial(port, baud_rate)
     except Exception as e:
@@ -37,7 +37,8 @@ def main():
         template = enroll_to_upper_computer(finger)
         if template:
             print(f'Template:: {template}')
-            print('\nPlease type in the ID # (from 1 to 255) you want to save this finger as...')
+            print(
+                '\nPlease type in the ID # (from 1 to 255) you want to save this finger as...')
             id = read_number()
             print(f'Storing template to flash library, with id #{id}\n')
             if store_from_upper_computer(finger=finger, template=template, page_id=id):
