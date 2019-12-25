@@ -20,7 +20,7 @@ class AdafruitFingerprint:
         data = [0x13, 0x0, 0x0, 0x0, 0x0]
         self.package.write(data=data)
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_PASSWORD_OK:
                 return FINGERPRINT_PASSWORD_OK
@@ -42,7 +42,7 @@ class AdafruitFingerprint:
         data = [0x01]
         self.package.write(data=data)
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
                 return FINGERPRINT_OK
@@ -65,7 +65,7 @@ class AdafruitFingerprint:
         data = [0x02, buffer]
         self.package.write(data=data)
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
                 return FINGERPRINT_OK
@@ -91,7 +91,7 @@ class AdafruitFingerprint:
         data = [0x05]
         self.package.write(data=data)
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
                 return FINGERPRINT_OK
@@ -113,7 +113,7 @@ class AdafruitFingerprint:
         self.package.write(data=data)
 
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
                 template = self.package.read_template()
@@ -136,7 +136,7 @@ class AdafruitFingerprint:
         self.package.write(data=data)
 
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
                 self.package.write_template(data=template)
@@ -159,7 +159,7 @@ class AdafruitFingerprint:
         self.package.write(data=data)
 
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
                 return FINGERPRINT_OK
@@ -183,7 +183,7 @@ class AdafruitFingerprint:
         self.package.write(data=data)
 
         serial_data = self.package.read()
-        if len(serial_data):
+        if len(serial_data) > 0:
             package_content = serial_data[4]
             if package_content == FINGERPRINT_OK:
                 page_id = hexbyte_2integer_normalizer(
