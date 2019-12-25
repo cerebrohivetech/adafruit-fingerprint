@@ -5,7 +5,6 @@ I - 4 bytes
 B - 1 byte
 '''
 
-import sys
 from time import sleep
 from struct import unpack, pack
 
@@ -63,6 +62,7 @@ class Package:
             serial_data = self.port.read(self.port.in_waiting)
             template = serial_data.hex()
             return template
+        return None
 
     def write_template(self, data):
         ''' Write template to serial buffer '''
