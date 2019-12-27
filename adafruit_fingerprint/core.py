@@ -6,7 +6,7 @@ command/data/result are all wrapped in data package format. The packets
 take the shape of package to be sent and received as specified by the
 adafruit fingerprint module.
 
-Classess
+Classes
 ________
 Package
     Contain methods for serial read and write of module package
@@ -52,7 +52,7 @@ class Package:
         write package (data packet) from the serail buffer
     read_template()
         read fingerprint template from the serial buffer
-    write_tempplate(data)
+    write_template(data)
         write fingerprint template to the serial buffer
     """
 
