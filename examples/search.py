@@ -31,7 +31,7 @@ def main():
 
     print('\nWaiting for valid finger!\n')
     while True:
-        response = search(finger, page_id=1, page_num=255)
+        response = search(finger=finger, page_id=1, page_num=255)
         if response:
             id, confidence = response
             print(f'Found ID #{id}', end='')

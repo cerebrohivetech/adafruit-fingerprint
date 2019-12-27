@@ -34,7 +34,7 @@ def main():
         print('Please type in the ID # (from 1 to 255) you want to save this finger as...')
         id = read_number()
         print(f'Enrolling id #{id}\n')
-        while not enroll_to_flash_library(finger=finger, id):
+        while not enroll_to_flash_library(finger=finger, id=id):
             break
 
 
