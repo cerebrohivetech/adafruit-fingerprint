@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Core &#8212; adafruit_fingerprint 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-adafruit_fingerprint.core">
+<span id="core"></span><h1>Core<a class="headerlink" href="#module-adafruit_fingerprint.core" title="Permalink to this headline">¶</a></h1>
+<p>Core module for serial communication of module data package format</p>
+<p>This module implements methods to read and write packets in the data
+package format. When communicating, the transferring and receiving of
+command/data/result are all wrapped in data package format. The packets
+take the shape of package to be sent and received as specified by the
+adafruit fingerprint module.</p>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>Package</dt><dd><p>Contain methods for serial read and write of module package</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="adafruit_fingerprint.core.Package">
+<em class="property">class </em><code class="sig-prename descclassname">adafruit_fingerprint.core.</code><code class="sig-name descname">Package</code><span class="sig-paren">(</span><em class="sig-param">port</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.core.Package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implemets data package format for adafruit fingerprint module</p>
+<p>Contain methods to read and write module package data format to and
+from the serial buffer. Before every read and write, the package
+(packet to be read or written) has to be deconstructed and
+constructed respectively before the read/write operation, to be
+able to pick out the “package content” which is important to the
+AdafruitFingerprint class.</p>
+<dl class="attribute">
+<dt id="adafruit_fingerprint.core.Package.port">
+<code class="sig-name descname">port</code><a class="headerlink" href="#adafruit_fingerprint.core.Package.port" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance of the Serial class from the serial module. The serial
+port passed down to allow serial communication
+(Default is None)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>serial.Serial</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adafruit_fingerprint.core.Package.header">
+<code class="sig-name descname">header</code><a class="headerlink" href="#adafruit_fingerprint.core.Package.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pakcage data header value (Default is 0xEF01)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adafruit_fingerprint.core.Package.address">
+<code class="sig-name descname">address</code><a class="headerlink" href="#adafruit_fingerprint.core.Package.address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Package data address value (Default is 0xFFFFFFFF)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adafruit_fingerprint.core.Package.identifier">
+<code class="sig-name descname">identifier</code><a class="headerlink" href="#adafruit_fingerprint.core.Package.identifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Package data identifier value. Values can be 01H, 02H or 07H</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adafruit_fingerprint.core.Package.package_head">
+<code class="sig-name descname">package_head</code><a class="headerlink" href="#adafruit_fingerprint.core.Package.package_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>a list containing package <cite>header</cite>, <cite>address</cite> and <cite>identifier</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.core.Package.read">
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.read"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.core.Package.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>read package (packet) from the serial buffer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.core.Package.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.core.Package.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>write package (data packet) from the serail buffer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.core.Package.read_template">
+<code class="sig-name descname">read_template</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.read_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.core.Package.read_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>read fingerprint template from the serial buffer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.core.Package.write_template">
+<code class="sig-name descname">write_template</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.write_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.core.Package.write_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>write fingerprint template to the serial buffer</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">read</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.read"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>read package data (packet) from the serial buffer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of integers. Unpacked via a specified format from a
+string of hex bytes</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>package</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">read_template</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.read_template"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Read fiingerprint template from serial buffer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>template</strong> (<em>string</em>) – if fingerprint template is read successfully</p></li>
+<li><p><em>None</em> – if no fingerprint template is read from serial buffer</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.write"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>write package data (data packet) from the serail buffer</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">write_template</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/core.html#Package.write_template"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Write fingerprint template to serial buffer</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Core</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/adafruit_fingerprint/core.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Odonghanro Faith, Nwanozie Promise, Adegoke Joshua.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Store From Upper Computer &#8212; adafruit_fingerprint 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Search Flash Library" href="search_flash_library.html" />
+    <link rel="prev" title="Enroll To Upper Computer" href="enroll_to_upper_computer.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="search_flash_library.html" title="Search Flash Library"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="enroll_to_upper_computer.html" title="Enroll To Upper Computer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Example Codes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="store-from-upper-computer">
+<span id="id1"></span><h1>Store From Upper Computer<a class="headerlink" href="#store-from-upper-computer" title="Permalink to this headline">¶</a></h1>
+<p>This sample code shows how to store a fingerprint from upper computer
+into a location in the flash library of the module.</p>
+<p>The first part of the code makes use of <a class="reference internal" href="enroll_to_upper_computer.html#enroll-to-upper-computer"><span class="std std-ref">enroll_to_upper_computer</span></a> function exposed in the sample code from the
+<a class="reference internal" href="enroll_to_upper_computer.html#enroll-to-upper-computer"><span class="std std-ref">Enroll to upper computer</span></a> example, as
+seen in line <cite>13</cite> where it is imported and line <cite>37</cite> where it is used.</p>
+<p>This saves us the stress of having to always copy and paste a previously
+stored template into the command line when the program is been ran.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Standard library imports</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="c1"># Third party imports</span>
+<span class="kn">import</span> <span class="nn">serial</span>
+
+<span class="c1"># Adafruit package imports</span>
+<span class="kn">from</span> <span class="nn">adafruit_fingerprint</span> <span class="kn">import</span> <span class="n">AdafruitFingerprint</span>
+<span class="kn">from</span> <span class="nn">adafruit_fingerprint.responses</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Example module imports</span>
+<span class="kn">from</span> <span class="nn">examples.enroll_to_upper_computer</span> <span class="kn">import</span> <span class="n">enroll_to_upper_computer</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Attempt to connect to serial port</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="s1">&#39;/dev/ttyUSB0&#39;</span>  <span class="c1"># USB TTL converter port</span>
+        <span class="n">baud_rate</span> <span class="o">=</span> <span class="s1">&#39;57600&#39;</span>
+        <span class="n">serial_port</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">port</span><span class="p">,</span> <span class="n">baud_rate</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="c1"># Initialize sensor library with serial port connection</span>
+    <span class="n">finger</span> <span class="o">=</span> <span class="n">AdafruitFingerprint</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="n">serial_port</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">finger</span><span class="o">.</span><span class="n">vfy_pwd</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">FINGERPRINT_PASSWORD_OK</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Did not find fingerprint sensor :(&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Found Fingerprint Sensor!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Ready to enroll a fingerprint!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">enroll_to_upper_computer</span><span class="p">(</span><span class="n">finger</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">template</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Template:: </span><span class="si">{template}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Please type in the ID # (from 1 to 255) you want to save this finger as...&#39;</span><span class="p">)</span>
+            <span class="nb">id</span> <span class="o">=</span> <span class="n">read_number</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Storing template to flash library, with id #</span><span class="si">{id}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">store_from_upper_computer</span><span class="p">(</span><span class="n">finger</span><span class="o">=</span><span class="n">finger</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span> <span class="n">page_id</span><span class="o">=</span><span class="nb">id</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Finished storing</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Failed to return template&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">read_number</span><span class="p">():</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please provide an integer&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please provide an integer in the above range&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">num</span>
+
+
+<span class="k">def</span> <span class="nf">store_from_upper_computer</span><span class="p">(</span><span class="n">finger</span><span class="p">,</span> <span class="n">template</span><span class="p">,</span> <span class="n">page_id</span><span class="p">):</span>
+    <span class="c1"># Buffer constants</span>
+    <span class="n">CHAR_BUFF_1</span> <span class="o">=</span> <span class="mh">0x01</span>
+    <span class="n">CHAR_BUFF_2</span> <span class="o">=</span> <span class="mh">0x02</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">finger</span><span class="o">.</span><span class="n">down_char</span><span class="p">(</span><span class="n">buffer</span><span class="o">=</span><span class="n">CHAR_BUFF_1</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">FINGERPRINT_OK</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Template downloaded successfully!&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">FINGERPRINT_PACKETRECEIVER</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Communication error&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">FINGERPRINT_TEMPLATEDOWNLOADFAIL</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Template download error&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">finger</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">buffer</span><span class="o">=</span><span class="n">CHAR_BUFF_1</span><span class="p">,</span> <span class="n">page_id</span><span class="o">=</span><span class="n">page_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">FINGERPRINT_OK</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Template stored successfully!&#39;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">page_id</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">FINGERPRINT_PACKETRECEIVER</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Communication error&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">FINGERPRINT_BADLOCATION</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Could not store in that location&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">FINGERPRINT_FLASHER</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error writing to flash&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="c1"># Expose only store function from module</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;store_from_upper_computer&#39;</span><span class="p">]</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="enroll_to_upper_computer.html"
+                        title="previous chapter">Enroll To Upper Computer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="search_flash_library.html"
+                        title="next chapter">Search Flash Library</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/store_from_upper_computer.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="search_flash_library.html" title="Search Flash Library"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="enroll_to_upper_computer.html" title="Enroll To Upper Computer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Example Codes</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Odonghanro Faith, Nwanozie Promise, Adegoke Joshua.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

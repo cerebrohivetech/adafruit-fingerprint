@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Responses &#8212; adafruit_fingerprint 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-adafruit_fingerprint.responses">
+<span id="responses"></span><h1>Responses<a class="headerlink" href="#module-adafruit_fingerprint.responses" title="Permalink to this headline">¶</a></h1>
+<p>Implements fingerprint module confirmation codes as constants</p>
+<p>Defined for the methods of the AdafruitFingerprint class. This
+module defines the confirmation codes for interfaces of the
+adafruit fingerprint module. Codes are defined as integer constants.</p>
+<div class="section" id="objects">
+<h2>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>_BASE: int</dt><dd><p>base to use for conversion of hex response contants</p>
+</dd>
+<dt>FINGERPRINT_OK<span class="classifier">int</span></dt><dd><p>multi-method response: Success for all operations (Value is 00H)</p>
+</dd>
+<dt>FINGERPRINT_PACKETRECEIVER<span class="classifier">int</span></dt><dd><p>multi-method response: Error when receiving package (Value is 01H)</p>
+</dd>
+<dt>FINGERPRINT_PASSWORD_OK<span class="classifier">int</span></dt><dd><p>vry_pwd response: Correct password (Value is 00H)</p>
+</dd>
+<dt>FINGERPRINT_WRONG_PASSWORD<span class="classifier">int</span></dt><dd><p>vry_pwd response: Wrong Password (Value is 13H)</p>
+</dd>
+<dt>FINGERPRINT_NOFINGER<span class="classifier">int</span></dt><dd><p>gen_img response: Can’t detect finger (Value is 02H)</p>
+</dd>
+<dt>FINGERPRINT_IMAGEFAIL<span class="classifier">int</span></dt><dd><p>gen_img response: fail to collect finger (Value is 03H)</p>
+</dd>
+<dt>FINGERPRINT_IMAGEMESS<span class="classifier">int</span></dt><dd><p>img_2Tz response: fail to generate character file due to the
+over-disorderly fingerprint image (Value is 06H)</p>
+</dd>
+<dt>FINGERPRINT_FEATUREFAIL<span class="classifier">int</span></dt><dd><p>img_2Tz response: fail to generate character file due to lackness
+of character point or over-smallness of fingerprint image
+(Value is 07H)</p>
+</dd>
+<dt>FINGERPRINT_INVALIDIMAGE<span class="classifier">int</span></dt><dd><p>img_2Tz response: fail to generate the image for the lackness of
+valid primary image (Value is 15H)</p>
+</dd>
+<dt>FINGERPRINT_ENROLLMISMATCH<span class="classifier">int</span></dt><dd><p>reg_model: fail to combine the character files. That’s, the
+character files don’t belong to one finger (Value is 0aH)</p>
+</dd>
+<dt>FINGERPRINT_TEMPLATEUPLOADFAIL<span class="classifier">int</span></dt><dd><p>up_char response: error when uploading template (Value is 0dH)</p>
+</dd>
+<dt>FINGERPRINT_TEMPLATEDOWNLOADFAIL<span class="classifier">int</span></dt><dd><p>up_char response: error when downloading template (Value is 0eH)</p>
+</dd>
+<dt>FINGERPRINT_BADLOCATION<span class="classifier">int</span></dt><dd><p>store response: addressing PageID is beyond the finger library
+(Value is 0bH)</p>
+</dd>
+<dt>FINGERPRINT_FLASHER<span class="classifier">int</span></dt><dd><p>store response: error when writing to flash library (Value is 18H)</p>
+</dd>
+<dt>FINGERPRINT_NOTFOUND<span class="classifier">int</span></dt><dd><p>search response: No matching print in the library (both the PageID
+and matching score are 0) (Value is 09H)</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Responses</a><ul>
+<li><a class="reference internal" href="#objects">Objects</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/adafruit_fingerprint/responses.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Odonghanro Faith, Nwanozie Promise, Adegoke Joshua.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

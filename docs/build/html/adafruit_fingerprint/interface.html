@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Interface &#8212; adafruit_fingerprint 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exceptions" href="exceptions.html" />
+    <link rel="prev" title="Core" href="core.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exceptions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="Core"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-adafruit_fingerprint.interface">
+<span id="interface"></span><h1>Interface<a class="headerlink" href="#module-adafruit_fingerprint.interface" title="Permalink to this headline">¶</a></h1>
+<p>AdafruitFingerprint core interface</p>
+<div class="section" id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>class AdafruitFingerprint</dt><dd><p>Implements the core interface of the fingerprint module as methods</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint">
+<em class="property">class </em><code class="sig-prename descclassname">adafruit_fingerprint.interface.</code><code class="sig-name descname">AdafruitFingerprint</code><span class="sig-paren">(</span><em class="sig-param">port=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface class for adafruit fingerprint module</p>
+<p>This class implements the methods for interacting with the
+adafruit fingerprint module as is in the official datasheet</p>
+<dl class="attribute">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.port">
+<code class="sig-name descname">port</code><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.port" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance of the Serial class from the serial module. The serial
+port passed to allow serial communication (Default is None)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>serial.Serial</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.pacakage">
+<code class="sig-name descname">pacakage</code><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.pacakage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instance of the Package class from the local core module that
+describes the complete format for communicating with the
+adafruit fingerprint module. The format describes/composes and
+receives the complete read and raw write packets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="core.html#adafruit_fingerprint.core.Package" title="adafruit_fingerprint.core.Package">core.Package</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.vfy_pwd">
+<code class="sig-name descname">vfy_pwd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.vfy_pwd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.vfy_pwd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify module’s handshaking password</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.gen_img">
+<code class="sig-name descname">gen_img</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.gen_img"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.gen_img" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detect finger and store the image in ImageBuffer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.img_2Tz">
+<code class="sig-name descname">img_2Tz</code><span class="sig-paren">(</span><em class="sig-param">buffer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.img_2Tz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.img_2Tz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate character file from the original finger image</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.reg_model">
+<code class="sig-name descname">reg_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.reg_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.reg_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine information of character files and generate a template</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.up_char">
+<code class="sig-name descname">up_char</code><span class="sig-paren">(</span><em class="sig-param">buffer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.up_char"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.up_char" title="Permalink to this definition">¶</a></dt>
+<dd><p>To upload the character file or template to upper computer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.down_char">
+<code class="sig-name descname">down_char</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.down_char"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.down_char" title="Permalink to this definition">¶</a></dt>
+<dd><p>To download character file or template from upper computer</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.store">
+<code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">page_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.store"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.store" title="Permalink to this definition">¶</a></dt>
+<dd><p>To store the template of specified buffer to flash library</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adafruit_fingerprint.interface.AdafruitFingerprint.search">
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">page_start</em>, <em class="sig-param">page_num</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#adafruit_fingerprint.interface.AdafruitFingerprint.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>To search the whole finger library for a matching template that</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">down_char</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">template</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.down_char"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>To download character file or template from upper computer
+to the Specified buffer of Module</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buffer</strong> (<em>int</em>) – one of two module CharBuffers used for template storage</p></li>
+<li><p><strong>template</strong> (<em>str</em>) – previously generated template passed down from upper computer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A confirmation code response constant</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">gen_img</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.gen_img"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Detecting finger and store the detected finger image in
+ImageBuffer while returning successful confirmation code; If
+there is no finger, returned confirmation code would be “can’t
+detect finger”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A confirmation code response constant</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">img_2Tz</code><span class="sig-paren">(</span><em class="sig-param">buffer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.img_2Tz"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>To generate character file from the original finger image in
+ImageBuffer and store the file in CharBuffer1 or CharBuffer2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>buffer</strong> (<em>int</em>) – one of two module CharBuffers used for template storage</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A confirmation code response constant</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">reg_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.reg_model"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>To combine information of character files from CharBuffer1
+and CharBuffer2 and generate a template which is stroed back in
+both CharBuffer1 and CharBuffer2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A confirmation code response constant</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">search</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">page_start=0</em>, <em class="sig-param">page_num=255</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.search"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>To search the whole finger library or a protion of it for
+the template that matches the One in CharBuffer1 or CharBuffer2
+When found, page_id will be returned</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buffer</strong> (<em>int</em>) – one of two module CharBuffers used for template storage</p></li>
+<li><p><strong>page_start</strong> (<em>int</em><em>, </em><em>optional</em>) – location in module flash library to start search from
+(Default is 0)</p></li>
+<li><p><strong>page_num</strong> (<em>int</em><em>, </em><em>optional</em>) – location in module flash library to end search
+(Default is 255)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A confirmation code response constant</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">store</code><span class="sig-paren">(</span><em class="sig-param">buffer</em>, <em class="sig-param">page_id</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.store"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>To store the template of specified buffer (Buffer1/Buffer2)
+at the designated Location (page) of Flash library</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>buffer</strong> (<em>int</em>) – one of two module CharBuffers used for template storage</p></li>
+<li><p><strong>page_id</strong> (<em>int</em>) – designated location in module flash library (0 - 255)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A confirmation code response constant</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">up_char</code><span class="sig-paren">(</span><em class="sig-param">buffer</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.up_char"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>To upload the character file or template of CharBuffer1
+or CharBuffer2 to upper computer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>buffer</strong> (<em>int</em>) – one of two module CharBuffers used for template storage</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Confirmation code response constant <cite>FINGERPRINT_OK</cite>
+And fingerprint template <cite>template</cite></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="sig-name descname">vfy_pwd</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/adafruit_fingerprint/interface.html#AdafruitFingerprint.vfy_pwd"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Verify module’s handshaking password</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.UnknownConfirmationCodeException" title="adafruit_fingerprint.exceptions.UnknownConfirmationCodeException"><strong>UnknownConfirmationCodeException</strong></a> – if no valid confirmation code is received from module</p></li>
+<li><p><a class="reference internal" href="exceptions.html#adafruit_fingerprint.exceptions.SerialReadException" title="adafruit_fingerprint.exceptions.SerialReadException"><strong>SerialReadException</strong></a> – if no serial data can be read from module</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>confirmation code response constant</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Interface</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="core.html"
+                        title="previous chapter">Core</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="exceptions.html"
+                        title="next chapter">Exceptions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/adafruit_fingerprint/interface.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exceptions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="core.html" title="Core"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Odonghanro Faith, Nwanozie Promise, Adegoke Joshua.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>
