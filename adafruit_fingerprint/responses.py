@@ -99,3 +99,6 @@ FINGERPRINT_FLASHER = int('0x18', _BASE)
 
 # Responses for search
 FINGERPRINT_NOTFOUND = int('0x09', _BASE)
+
+# Responses for delete
+FINGERPRINT_TEMPLATEDELETEFAIL = int('0x10', _BASE)
