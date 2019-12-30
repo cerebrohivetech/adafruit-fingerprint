@@ -51,8 +51,10 @@ class AdafruitFingerprint:
         To download character file or template from upper computer
     store(buffer, page_id)
         To store the template of specified buffer to flash library
-    search(buffer, page_start, page_num)
+    search(buffer, page_start=0, page_num=255)
         To search the whole finger library for a matching template that
+    delete_char(page_id, n)
+        To delete a segment (n) of templates of Flash library
     """
 
     def __init__(self, port=None):
@@ -70,12 +72,12 @@ class AdafruitFingerprint:
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
-        integer
-            confirmation code response constant
+        int
+            Confirmation code (A response object)
         """
 
         data = [0x13, 0x0, 0x0, 0x0, 0x0]
@@ -96,22 +98,22 @@ class AdafruitFingerprint:
         raise SerialReadException('No data read from serial port')
 
     def gen_img(self):
-        """Detecting finger and store the detected finger image in
+        """Try detecting finger and store the detected finger image in
         ImageBuffer while returning successful confirmation code; If
         there is no finger, returned confirmation code would be “can’t
-        detect finger”
+        detect finger”.
 
         Raises
         ______
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
-        integer
-            A confirmation code response constant
+        int
+            Confirmation code (A response object)
         """
 
         data = [0x01]
@@ -136,7 +138,7 @@ class AdafruitFingerprint:
     # pylint: disable=invalid-name
     def img_2Tz(self, buffer):
         """To generate character file from the original finger image in
-        ImageBuffer and store the file in CharBuffer1 or CharBuffer2
+        ImageBuffer and store the file in CharBuffer1 or CharBuffer2.
 
         Parameters
         __________
@@ -148,12 +150,12 @@ class AdafruitFingerprint:
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
-        integer
-            A confirmation code response constant
+        int
+            Confirmation code (A response object)
         """
 
         data = [0x02, buffer]
@@ -180,19 +182,19 @@ class AdafruitFingerprint:
     def reg_model(self):
         """To combine information of character files from CharBuffer1
         and CharBuffer2 and generate a template which is stroed back in
-        both CharBuffer1 and CharBuffer2
+        both CharBuffer1 and CharBuffer2.
 
         Raises
         ______
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
-        integer
-            A confirmation code response constant
+        int
+            Confirmation code (A response object)
         """
 
         data = [0x05]
@@ -214,7 +216,7 @@ class AdafruitFingerprint:
 
     def up_char(self, buffer):
         """To upload the character file or template of CharBuffer1
-        or CharBuffer2 to upper computer
+        or CharBuffer2 to upper computer.
 
         Parameters
         __________
@@ -226,13 +228,15 @@ class AdafruitFingerprint:
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
         tuple
-            Confirmation code response constant `FINGERPRINT_OK`
-            And fingerprint template `template`
+            On success. Confirmation code (A response object)
+            and fingerprint template `template`
+        int
+            On failure. Confirmation code (A response object)
         """
 
         data = [0x08, buffer]
@@ -255,7 +259,7 @@ class AdafruitFingerprint:
 
     def down_char(self, buffer, template):
         """To download character file or template from upper computer
-        to the Specified buffer of Module
+        to the Specified buffer of Module.
 
         Parameters
         __________
@@ -269,12 +273,12 @@ class AdafruitFingerprint:
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
-        integer
-            A confirmation code response constant
+        int
+            Confirmation code (A response object)
         """
 
         data = [0x09, buffer]
@@ -297,7 +301,7 @@ class AdafruitFingerprint:
 
     def store(self, buffer, page_id):
         """To store the template of specified buffer (Buffer1/Buffer2)
-        at the designated Location (page) of Flash library
+        at the designated Location (page) of Flash library.
 
         Parameters
         __________
@@ -311,12 +315,12 @@ class AdafruitFingerprint:
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
-        integer
-            A confirmation code response constant
+        int
+            Confirmation code (A response object)
         """
         data = [0x06, buffer, 0x00, page_id]
         self.package.write(data=data)
@@ -340,7 +344,7 @@ class AdafruitFingerprint:
     def search(self, buffer, page_start=0, page_num=255):
         """To search the whole finger library or a protion of it for
         the template that matches the One in CharBuffer1 or CharBuffer2
-        When found, page_id will be returned
+        When found, page_id will be returned.
 
         Parameters
         __________
@@ -358,12 +362,15 @@ class AdafruitFingerprint:
         UnknownConfirmationCodeException
             if no valid confirmation code is received from module
         SerialReadException
-            if no serial data can be read from module
+            if no serial data can be read from buffer (from module)
 
         Returns
         _______
-        integer
-            A confirmation code response constant
+        tuple
+            On success. Confirmation code (A response object),
+            `page_id` where template was fonud, and the confidence score
+        int
+            On failure. Confirmation code (A response object)
         """
 
         data = [0x04, buffer, 0x00, page_start, 0x00, page_num]
@@ -382,6 +389,52 @@ class AdafruitFingerprint:
                 return FINGERPRINT_PACKETRECEIVER
             elif package_content == FINGERPRINT_NOTFOUND:
                 return FINGERPRINT_NOTFOUND
+            else:
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
+        raise SerialReadException('No data read from serial port')
+
+    def delete_char(self, page_id, num = 1):
+        """To delete a segment (n) of templates of Flash library started
+        from the specified location (or Page_id).
+
+        Parameters
+        __________
+        page_id : int
+            location in module flash library to start delete from
+        num : int
+            number of templates to be deleted from module flash library
+            (Default is 1)
+
+        Raises
+        ______
+        UnknownConfirmationCodeException
+            if no valid confirmation code is received from module
+        SerialReadException
+            if no serial data can be read from buffer (from module)
+
+        Returns
+        _______
+        int
+            Confirmation code (A response object)
+        """
+
+        data = [0x0c, 0x00, page_id, 0x00, num]
+        self.package.write(data=data)
+
+        serial_data = self.package.read()
+        if len(serial_data) > 0:
+            package_content = serial_data[4]
+            if package_content == FINGERPRINT_OK:
+                return FINGERPRINT_OK
+            elif package_content == FINGERPRINT_PACKETRECEIVER:
+                return FINGERPRINT_PACKETRECEIVER
+            elif package_content == FINGERPRINT_TEMPLATEDELETEFAIL:
+                return FINGERPRINT_TEMPLATEDELETEFAIL
+            elif package_content == FINGERPRINT_BADLOCATION:
+                return FINGERPRINT_BADLOCATION
+            elif package_content == FINGERPRINT_FLASHER:
+                return FINGERPRINT_FLASHER
             else:
                 raise UnknownConfirmationCodeException(
                     'Unknown confirmation code')
