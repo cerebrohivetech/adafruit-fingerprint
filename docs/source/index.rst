@@ -6,6 +6,9 @@
 Welcome to adafruit_fingerprint's documentation!
 ================================================
 
+Other pages (online)
+    * `project page on github <https://github.com/cerebrohivetech/adafruit-fingerprint>`_
+
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
