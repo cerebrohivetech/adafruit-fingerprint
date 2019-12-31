@@ -1,9 +1,6 @@
 Adafruit Fingerprint Core Library Documentation
 ===============================================
 
-Below are some popular use cases of the adafruit fingerprint module and
-their sample codes using this library
-
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
@@ -21,9 +18,9 @@ you'll have to deal with to implement code for your use case.
 
 The `Core`, `Exceptions` and `Utils` modules are internal modules used
 internally by the `adafruit_fingerprint` package itself to build up the
-interface. The interface exposes the ``AdafruitFinrgerprint`` class,
+interface. The interface exposes the ``AdafruitFingerprint`` class,
 which can be imported directly from the package like so
-``from adafruit_fingerprint import AdafruitFinrgerprint``. This class is
+``from adafruit_fingerprint import AdafruitFingerprint``. This class is
 the only object exposed by the package's `__init__` file.
 
 And the responses can be imported like so

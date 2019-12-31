@@ -88,8 +88,12 @@
 <span class="sd">        To download character file or template from upper computer</span>
 <span class="sd">    store(buffer, page_id)</span>
 <span class="sd">        To store the template of specified buffer to flash library</span>
-<span class="sd">    search(buffer, page_start, page_num)</span>
+<span class="sd">    search(buffer, page_start=0, page_num=255)</span>
 <span class="sd">        To search the whole finger library for a matching template that</span>
+<span class="sd">    delete_char(page_id, n)</span>
+<span class="sd">        To delete a segment (n) of templates of Flash library</span>
+<span class="sd">    empty()</span>
+<span class="sd">        to delete all the templates in the Flash library</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -107,12 +111,12 @@
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
-<span class="sd">        integer</span>
-<span class="sd">            confirmation code response constant</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x13</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">,</span> <span class="mh">0x0</span><span class="p">]</span>
@@ -133,22 +137,22 @@
         <span class="k">raise</span> <span class="n">SerialReadException</span><span class="p">(</span><span class="s1">&#39;No data read from serial port&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="AdafruitFingerprint.gen_img"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.gen_img">[docs]</a>    <span class="k">def</span> <span class="nf">gen_img</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Detecting finger and store the detected finger image in</span>
+        <span class="sd">&quot;&quot;&quot;Try detecting finger and store the detected finger image in</span>
 <span class="sd">        ImageBuffer while returning successful confirmation code; If</span>
 <span class="sd">        there is no finger, returned confirmation code would be “can’t</span>
-<span class="sd">        detect finger”</span>
+<span class="sd">        detect finger”.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ______</span>
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
-<span class="sd">        integer</span>
-<span class="sd">            A confirmation code response constant</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x01</span><span class="p">]</span>
@@ -173,7 +177,7 @@
     <span class="c1"># pylint: disable=invalid-name</span>
 <div class="viewcode-block" id="AdafruitFingerprint.img_2Tz"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.img_2Tz">[docs]</a>    <span class="k">def</span> <span class="nf">img_2Tz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;To generate character file from the original finger image in</span>
-<span class="sd">        ImageBuffer and store the file in CharBuffer1 or CharBuffer2</span>
+<span class="sd">        ImageBuffer and store the file in CharBuffer1 or CharBuffer2.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        __________</span>
@@ -185,12 +189,12 @@
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
-<span class="sd">        integer</span>
-<span class="sd">            A confirmation code response constant</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x02</span><span class="p">,</span> <span class="n">buffer</span><span class="p">]</span>
@@ -217,19 +221,19 @@
 <div class="viewcode-block" id="AdafruitFingerprint.reg_model"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.reg_model">[docs]</a>    <span class="k">def</span> <span class="nf">reg_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;To combine information of character files from CharBuffer1</span>
 <span class="sd">        and CharBuffer2 and generate a template which is stroed back in</span>
-<span class="sd">        both CharBuffer1 and CharBuffer2</span>
+<span class="sd">        both CharBuffer1 and CharBuffer2.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ______</span>
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
-<span class="sd">        integer</span>
-<span class="sd">            A confirmation code response constant</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x05</span><span class="p">]</span>
@@ -251,7 +255,7 @@
 
 <div class="viewcode-block" id="AdafruitFingerprint.up_char"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.up_char">[docs]</a>    <span class="k">def</span> <span class="nf">up_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;To upload the character file or template of CharBuffer1</span>
-<span class="sd">        or CharBuffer2 to upper computer</span>
+<span class="sd">        or CharBuffer2 to upper computer.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        __________</span>
@@ -263,13 +267,15 @@
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
 <span class="sd">        tuple</span>
-<span class="sd">            Confirmation code response constant `FINGERPRINT_OK`</span>
-<span class="sd">            And fingerprint template `template`</span>
+<span class="sd">            On success. Confirmation code (A response object)</span>
+<span class="sd">            and fingerprint template `template`</span>
+<span class="sd">        int</span>
+<span class="sd">            On failure. Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x08</span><span class="p">,</span> <span class="n">buffer</span><span class="p">]</span>
@@ -292,7 +298,7 @@
 
 <div class="viewcode-block" id="AdafruitFingerprint.down_char"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.down_char">[docs]</a>    <span class="k">def</span> <span class="nf">down_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">template</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;To download character file or template from upper computer</span>
-<span class="sd">        to the Specified buffer of Module</span>
+<span class="sd">        to the Specified buffer of Module.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        __________</span>
@@ -306,12 +312,12 @@
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
-<span class="sd">        integer</span>
-<span class="sd">            A confirmation code response constant</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x09</span><span class="p">,</span> <span class="n">buffer</span><span class="p">]</span>
@@ -334,7 +340,7 @@
 
 <div class="viewcode-block" id="AdafruitFingerprint.store"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.store">[docs]</a>    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">page_id</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;To store the template of specified buffer (Buffer1/Buffer2)</span>
-<span class="sd">        at the designated Location (page) of Flash library</span>
+<span class="sd">        at the designated Location (page) of Flash library.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        __________</span>
@@ -348,12 +354,12 @@
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
-<span class="sd">        integer</span>
-<span class="sd">            A confirmation code response constant</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x06</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="n">page_id</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
@@ -377,7 +383,7 @@
 <div class="viewcode-block" id="AdafruitFingerprint.search"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">page_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">page_num</span><span class="o">=</span><span class="mi">255</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;To search the whole finger library or a protion of it for</span>
 <span class="sd">        the template that matches the One in CharBuffer1 or CharBuffer2</span>
-<span class="sd">        When found, page_id will be returned</span>
+<span class="sd">        When found, page_id will be returned.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        __________</span>
@@ -395,12 +401,15 @@
 <span class="sd">        UnknownConfirmationCodeException</span>
 <span class="sd">            if no valid confirmation code is received from module</span>
 <span class="sd">        SerialReadException</span>
-<span class="sd">            if no serial data can be read from module</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        _______</span>
-<span class="sd">        integer</span>
-<span class="sd">            A confirmation code response constant</span>
+<span class="sd">        tuple</span>
+<span class="sd">            On success. Confirmation code (A response object),</span>
+<span class="sd">            `page_id` where template was fonud, and the confidence score</span>
+<span class="sd">        int</span>
+<span class="sd">            On failure. Confirmation code (A response object)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x04</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="n">page_start</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="n">page_num</span><span class="p">]</span>
@@ -419,6 +428,85 @@
                 <span class="k">return</span> <span class="n">FINGERPRINT_PACKETRECEIVER</span>
             <span class="k">elif</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_NOTFOUND</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">FINGERPRINT_NOTFOUND</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">UnknownConfirmationCodeException</span><span class="p">(</span>
+                    <span class="s1">&#39;Unknown confirmation code&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">SerialReadException</span><span class="p">(</span><span class="s1">&#39;No data read from serial port&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AdafruitFingerprint.delete_char"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.delete_char">[docs]</a>    <span class="k">def</span> <span class="nf">delete_char</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;To delete a segment (n) of templates of Flash library started</span>
+<span class="sd">        from the specified location (or Page_id).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        __________</span>
+<span class="sd">        page_id : int</span>
+<span class="sd">            location in module flash library to start delete from</span>
+<span class="sd">        num : int</span>
+<span class="sd">            number of templates to be deleted from module flash library</span>
+<span class="sd">            (Default is 1)</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ______</span>
+<span class="sd">        UnknownConfirmationCodeException</span>
+<span class="sd">            if no valid confirmation code is received from module</span>
+<span class="sd">        SerialReadException</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        _______</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x0c</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="n">page_id</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">,</span> <span class="n">num</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">serial_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serial_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">package_content</span> <span class="o">=</span> <span class="n">serial_data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_OK</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_OK</span>
+            <span class="k">elif</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_PACKETRECEIVER</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_PACKETRECEIVER</span>
+            <span class="k">elif</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_TEMPLATEDELETEFAIL</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_TEMPLATEDELETEFAIL</span>
+            <span class="k">elif</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_BADLOCATION</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_BADLOCATION</span>
+            <span class="k">elif</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_FLASHER</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_FLASHER</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">UnknownConfirmationCodeException</span><span class="p">(</span>
+                    <span class="s1">&#39;Unknown confirmation code&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">SerialReadException</span><span class="p">(</span><span class="s1">&#39;No data read from serial port&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AdafruitFingerprint.empty"><a class="viewcode-back" href="../../adafruit_fingerprint/interface.html#adafruit_fingerprint.interface.AdafruitFingerprint.empty">[docs]</a>    <span class="k">def</span> <span class="nf">empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;to delete all the templates in the Flash library</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ______</span>
+<span class="sd">        UnknownConfirmationCodeException</span>
+<span class="sd">            if no valid confirmation code is received from module</span>
+<span class="sd">        SerialReadException</span>
+<span class="sd">            if no serial data can be read from buffer (from module)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        _______</span>
+<span class="sd">        int</span>
+<span class="sd">            Confirmation code (A response object)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mh">0x0d</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">serial_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">serial_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">package_content</span> <span class="o">=</span> <span class="n">serial_data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_OK</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_OK</span>
+            <span class="k">elif</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_PACKETRECEIVER</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_PACKETRECEIVER</span>
+            <span class="k">elif</span> <span class="n">package_content</span> <span class="o">==</span> <span class="n">FINGERPRINT_TEMPLATECLEARALLFAIL</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">FINGERPRINT_TEMPLATECLEARALLFAIL</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">UnknownConfirmationCodeException</span><span class="p">(</span>
                     <span class="s1">&#39;Unknown confirmation code&#39;</span><span class="p">)</span>

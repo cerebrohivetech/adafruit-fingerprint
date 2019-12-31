@@ -14,3 +14,4 @@ their sample codes using this library
     enroll_to_upper_computer
     store_from_upper_computer
     search_flash_library
+    delete

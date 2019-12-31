@@ -13,7 +13,9 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utils" href="utils.html" />
+    <link rel="prev" title="Exceptions" href="exceptions.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,7 +26,14 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="utils.html" title="Utils"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exceptions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Adafruit Fingerprint Core Library Documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -48,38 +57,42 @@ adafruit fingerprint module. Codes are defined as integer constants.</p>
 </dd>
 <dt>FINGERPRINT_PACKETRECEIVER<span class="classifier">int</span></dt><dd><p>multi-method response: Error when receiving package (Value is 01H)</p>
 </dd>
-<dt>FINGERPRINT_PASSWORD_OK<span class="classifier">int</span></dt><dd><p>vry_pwd response: Correct password (Value is 00H)</p>
+<dt>FINGERPRINT_PASSWORD_OK<span class="classifier">int</span></dt><dd><p><cite>vry_pwd</cite> response: Correct password (Value is 00H)</p>
 </dd>
-<dt>FINGERPRINT_WRONG_PASSWORD<span class="classifier">int</span></dt><dd><p>vry_pwd response: Wrong Password (Value is 13H)</p>
+<dt>FINGERPRINT_WRONG_PASSWORD<span class="classifier">int</span></dt><dd><p><cite>vry_pwd</cite> response: Wrong Password (Value is 13H)</p>
 </dd>
-<dt>FINGERPRINT_NOFINGER<span class="classifier">int</span></dt><dd><p>gen_img response: Can’t detect finger (Value is 02H)</p>
+<dt>FINGERPRINT_NOFINGER<span class="classifier">int</span></dt><dd><p><cite>gen_img</cite> response: Can’t detect finger (Value is 02H)</p>
 </dd>
-<dt>FINGERPRINT_IMAGEFAIL<span class="classifier">int</span></dt><dd><p>gen_img response: fail to collect finger (Value is 03H)</p>
+<dt>FINGERPRINT_IMAGEFAIL<span class="classifier">int</span></dt><dd><p><cite>gen_img</cite> response: fail to collect finger (Value is 03H)</p>
 </dd>
-<dt>FINGERPRINT_IMAGEMESS<span class="classifier">int</span></dt><dd><p>img_2Tz response: fail to generate character file due to the
+<dt>FINGERPRINT_IMAGEMESS<span class="classifier">int</span></dt><dd><p><cite>img_2Tz</cite> response: fail to generate character file due to the
 over-disorderly fingerprint image (Value is 06H)</p>
 </dd>
-<dt>FINGERPRINT_FEATUREFAIL<span class="classifier">int</span></dt><dd><p>img_2Tz response: fail to generate character file due to lackness
+<dt>FINGERPRINT_FEATUREFAIL<span class="classifier">int</span></dt><dd><p><cite>img_2Tz</cite> response: fail to generate character file due to lackness
 of character point or over-smallness of fingerprint image
 (Value is 07H)</p>
 </dd>
-<dt>FINGERPRINT_INVALIDIMAGE<span class="classifier">int</span></dt><dd><p>img_2Tz response: fail to generate the image for the lackness of
+<dt>FINGERPRINT_INVALIDIMAGE<span class="classifier">int</span></dt><dd><p><cite>img_2Tz</cite> response: fail to generate the image for the lackness of
 valid primary image (Value is 15H)</p>
 </dd>
 <dt>FINGERPRINT_ENROLLMISMATCH<span class="classifier">int</span></dt><dd><p>reg_model: fail to combine the character files. That’s, the
 character files don’t belong to one finger (Value is 0aH)</p>
 </dd>
-<dt>FINGERPRINT_TEMPLATEUPLOADFAIL<span class="classifier">int</span></dt><dd><p>up_char response: error when uploading template (Value is 0dH)</p>
+<dt>FINGERPRINT_TEMPLATEUPLOADFAIL<span class="classifier">int</span></dt><dd><p><cite>up_char</cite> response: error when uploading template (Value is 0dH)</p>
 </dd>
-<dt>FINGERPRINT_TEMPLATEDOWNLOADFAIL<span class="classifier">int</span></dt><dd><p>up_char response: error when downloading template (Value is 0eH)</p>
+<dt>FINGERPRINT_TEMPLATEDOWNLOADFAIL<span class="classifier">int</span></dt><dd><p><cite>up_char</cite> response: error when downloading template (Value is 0eH)</p>
 </dd>
-<dt>FINGERPRINT_BADLOCATION<span class="classifier">int</span></dt><dd><p>store response: addressing PageID is beyond the finger library
+<dt>FINGERPRINT_BADLOCATION<span class="classifier">int</span></dt><dd><p><cite>store</cite> response: addressing PageID is beyond the finger library
 (Value is 0bH)</p>
 </dd>
-<dt>FINGERPRINT_FLASHER<span class="classifier">int</span></dt><dd><p>store response: error when writing to flash library (Value is 18H)</p>
+<dt>FINGERPRINT_FLASHER<span class="classifier">int</span></dt><dd><p><cite>store</cite> response: error when writing to flash library (Value is 18H)</p>
 </dd>
-<dt>FINGERPRINT_NOTFOUND<span class="classifier">int</span></dt><dd><p>search response: No matching print in the library (both the PageID
+<dt>FINGERPRINT_NOTFOUND<span class="classifier">int</span></dt><dd><p><cite>search</cite> response: No matching print in the library (both the PageID
 and matching score are 0) (Value is 09H)</p>
+</dd>
+<dt>FINGERPRINT_TEMPLATEDELETEFAIL<span class="classifier">int</span></dt><dd><p><cite>delete_char</cite> response: fail to delete templates</p>
+</dd>
+<dt>FINGERPRINT_TEMPLATECLEARALLFAIL<span class="classifier">int</span></dt><dd><p><cite>empty</cite> response: fail to clear finger library</p>
 </dd>
 </dl>
 </div>
@@ -99,6 +112,12 @@ and matching score are 0) (Value is 09H)</p>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="exceptions.html"
+                        title="previous chapter">Exceptions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="utils.html"
+                        title="next chapter">Utils</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -129,7 +148,14 @@ and matching score are 0) (Value is 09H)</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="utils.html" title="Utils"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="exceptions.html" title="Exceptions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">adafruit_fingerprint 1.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Adafruit Fingerprint Core Library Documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
