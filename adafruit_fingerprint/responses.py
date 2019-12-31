@@ -63,6 +63,9 @@ FINGERPRINT_NOTFOUND : int
 
 FINGERPRINT_TEMPLATEDELETEFAIL : int
     `delete_char` response: fail to delete templates
+
+FINGERPRINT_TEMPLATECLEARALLFAIL : int
+    `empty` response: fail to clear finger library
 """
 
 
@@ -104,3 +107,6 @@ FINGERPRINT_NOTFOUND = int('0x09', _BASE)
 
 # Responses for delete
 FINGERPRINT_TEMPLATEDELETEFAIL = int('0x10', _BASE)
+
+# Responses for empty
+FINGERPRINT_TEMPLATECLEARALLFAIL = int('0x11', _BASE)
