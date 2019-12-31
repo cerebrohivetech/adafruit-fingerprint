@@ -16,28 +16,28 @@ FINGERPRINT_PACKETRECEIVER : int
     multi-method response: Error when receiving package (Value is 01H)
 
 FINGERPRINT_PASSWORD_OK : int
-    vry_pwd response: Correct password (Value is 00H)
+    `vry_pwd` response: Correct password (Value is 00H)
 
 FINGERPRINT_WRONG_PASSWORD : int
-    vry_pwd response: Wrong Password (Value is 13H)
+    `vry_pwd` response: Wrong Password (Value is 13H)
 
 FINGERPRINT_NOFINGER : int
-    gen_img response: Can't detect finger (Value is 02H)
+    `gen_img` response: Can't detect finger (Value is 02H)
 
 FINGERPRINT_IMAGEFAIL : int
-    gen_img response: fail to collect finger (Value is 03H)
+    `gen_img` response: fail to collect finger (Value is 03H)
 
 FINGERPRINT_IMAGEMESS : int
-    img_2Tz response: fail to generate character file due to the
+    `img_2Tz` response: fail to generate character file due to the
     over-disorderly fingerprint image (Value is 06H)
 
 FINGERPRINT_FEATUREFAIL : int
-    img_2Tz response: fail to generate character file due to lackness
+    `img_2Tz` response: fail to generate character file due to lackness
     of character point or over-smallness of fingerprint image
     (Value is 07H)
 
 FINGERPRINT_INVALIDIMAGE : int
-    img_2Tz response: fail to generate the image for the lackness of
+    `img_2Tz` response: fail to generate the image for the lackness of
     valid primary image (Value is 15H)
 
 FINGERPRINT_ENROLLMISMATCH : int
@@ -45,22 +45,24 @@ FINGERPRINT_ENROLLMISMATCH : int
     character files don’t belong to one finger (Value is 0aH)
 
 FINGERPRINT_TEMPLATEUPLOADFAIL : int
-    up_char response: error when uploading template (Value is 0dH)
+    `up_char` response: error when uploading template (Value is 0dH)
 
 FINGERPRINT_TEMPLATEDOWNLOADFAIL : int
-    up_char response: error when downloading template (Value is 0eH)
+    `up_char` response: error when downloading template (Value is 0eH)
 
 FINGERPRINT_BADLOCATION : int
-    store response: addressing PageID is beyond the finger library
+    `store` response: addressing PageID is beyond the finger library
     (Value is 0bH)
 
 FINGERPRINT_FLASHER : int
-    store response: error when writing to flash library (Value is 18H)
+    `store` response: error when writing to flash library (Value is 18H)
 
 FINGERPRINT_NOTFOUND : int
-    search response: No matching print in the library (both the PageID
+    `search` response: No matching print in the library (both the PageID
     and matching score are 0) (Value is 09H)
-    
+
+FINGERPRINT_TEMPLATEDELETEFAIL : int
+    `delete_char` response: fail to delete templates
 """
 
 
