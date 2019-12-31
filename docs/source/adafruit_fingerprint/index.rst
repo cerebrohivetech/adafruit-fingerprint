@@ -1,9 +1,6 @@
 Adafruit Fingerprint Core Library Documentation
 ===============================================
 
-Below are some popular use cases of the adafruit fingerprint module and
-their sample codes using this library
-
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
