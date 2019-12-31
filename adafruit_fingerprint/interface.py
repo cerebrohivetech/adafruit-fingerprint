@@ -394,7 +394,7 @@ class AdafruitFingerprint:
                     'Unknown confirmation code')
         raise SerialReadException('No data read from serial port')
 
-    def delete_char(self, page_id, num = 1):
+    def delete_char(self, page_id, num=1):
         """To delete a segment (n) of templates of Flash library started
         from the specified location (or Page_id).
 
@@ -435,6 +435,39 @@ class AdafruitFingerprint:
                 return FINGERPRINT_BADLOCATION
             elif package_content == FINGERPRINT_FLASHER:
                 return FINGERPRINT_FLASHER
+            else:
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
+        raise SerialReadException('No data read from serial port')
+
+    def empty(self):
+        """to delete all the templates in the Flash library
+
+        Raises
+        ______
+        UnknownConfirmationCodeException
+            if no valid confirmation code is received from module
+        SerialReadException
+            if no serial data can be read from buffer (from module)
+
+        Returns
+        _______
+        int
+            Confirmation code (A response object)
+        """
+
+        data = [0x0d]
+        self.package.write(data=data)
+
+        serial_data = self.package.read()
+        if len(serial_data) > 0:
+            package_content = serial_data[4]
+            if package_content == FINGERPRINT_OK:
+                return FINGERPRINT_OK
+            elif package_content == FINGERPRINT_PACKETRECEIVER:
+                return FINGERPRINT_PACKETRECEIVER
+            elif package_content == FINGERPRINT_TEMPLATECLEARALLFAIL:
+                return FINGERPRINT_TEMPLATECLEARALLFAIL
             else:
                 raise UnknownConfirmationCodeException(
                     'Unknown confirmation code')
