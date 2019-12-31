@@ -55,6 +55,8 @@ class AdafruitFingerprint:
         To search the whole finger library for a matching template that
     delete_char(page_id, n)
         To delete a segment (n) of templates of Flash library
+    empty()
+        to delete all the templates in the Flash library
     """
 
     def __init__(self, port=None):
