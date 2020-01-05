@@ -15,3 +15,4 @@ their sample codes using this library
     store_from_upper_computer
     search_flash_library
     delete
+    empty
