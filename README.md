@@ -1,4 +1,7 @@
 # adafruit-fingerprint
+
+[![Documentation Status](https://readthedocs.org/projects/adafruit-fingerprint/badge/?version=latest)](https://adafruit-fingerprint.readthedocs.io/en/latest/?badge=latest)
+
 > This library enables you communicate and with the r305 Fingerprint Identification Module via serial connection with upper computer.
 
 The library enables you to  to communicate with the r305 fingerprint module from upper computer (your laptop, a raspberry pi etc), rather than the arduino which it was built for by default. The module communicates via TTL, therefore, to communicate you need a _USB - TTL converter_ connected to the module.
@@ -21,21 +24,30 @@ Visit the [Examples Codes] section on the [docs] to view all examples.
 
 ## Development setup
 
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
+### Requirements
+- Python3.x (x >= 6)
+- pip
+- hardware setup. See [docs - hardware section].
+
+### Get started
 
 ```sh
-pip install
+pip install -r requirements.txt
+```
+
+### Running tests
+```sh
 python -m unittest discover tests
 ```
 
 ## Release History
 
 * 1.0.0
-  * 
+  * Good enough for most use cases
 
 ## Meta
 
-This package is heavily inspired by the [finger_sphinx] project, found during our search for a way to get the fingerprint template to upper computer, rather than have it stored in flash library.
+This package is heavily inspired by the [finger_sphinx] project, found during our search for a way to get the fingerprint template to upper computer, rather than have it stored in flash library. A very big kudos and acknowledgement to the owners.
 
 > Faith Odonghanro – [@toritsejuFO](https://twitter.com/toritsejuFO) (twitter), [toritsejuFO](https://github.com/toritsejuFO/) (github)
 
@@ -48,14 +60,14 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 ## Contributing
 
 1. Fork the repo
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
+2. Create your feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -am 'Add some your-feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
 5. Create a new Pull Request
 
-<!-- Markdown link & img dfn's -->
+<!-- Markdown links -->
 [finger_sphinx]: https://fingerprint-module-r305-python-and-mysql.readthedocs.io/en/latest/
-[docs - hardware section]: harwawresetuplink
-[Examples Codes]: examplelink
-[docs]: docslinks
+[docs - hardware section]: https://adafruit-fingerprint.readthedocs.io/en/latest/index.html
+[Examples Codes]: https://adafruit-fingerprint.readthedocs.io/en/latest/examples/index.html
+[docs]: https://adafruit-fingerprint.readthedocs.io/en/latest/index.html
 [here]: https://github.com/cerebrohivetech/adafruit-fingerprint/raw/master/finger-print-module.pdf
