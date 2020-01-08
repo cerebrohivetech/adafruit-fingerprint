@@ -55,7 +55,7 @@ This package is heavily inspired by the [finger_sphinx] project, found during ou
 
 > Adegoke Joshua – [@iAmCodedebugger](https://twitter.com/iAmCodedebugger) (twitter), [Ade-Joshe](https://github.com/Ade-Joshe/) (github)
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+Distributed under the MIT license. See ``LICENSE`` for more information.
 
 ## Contributing
 
