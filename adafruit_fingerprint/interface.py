@@ -1,4 +1,4 @@
-"""AdafruitFingerprint core interface
+"""AdafruitFingerprint core API
 
 Classes
 _______
@@ -23,47 +23,53 @@ class AdafruitFingerprint:
 
     This class implements the methods for interacting with the
     adafruit fingerprint module as is in the official datasheet
-
-    Attributes
-    __________
-    port : serial.Serial
-        Instance of the Serial class from the serial module. The serial
-        port passed to allow serial communication (Default is None)
-    pacakage : core.Package
-        Instance of the Package class from the local core module that
-        describes the complete format for communicating with the
-        adafruit fingerprint module. The format describes/composes and
-        receives the complete read and raw write packets
-
-    Methods
-    _______
-    vfy_pwd()
-        Verify module's handshaking password
-    gen_img()
-        Detect finger and store the image in ImageBuffer
-    img_2Tz(buffer)
-        Generate character file from the original finger image
-    reg_model()
-        Combine information of character files and generate a template
-    up_char(buffer)
-        To upload the character file or template to upper computer
-    down_char(buffer, template)
-        To download character file or template from upper computer
-    store(buffer, page_id)
-        To store the template of specified buffer to flash library
-    search(buffer, page_start=0, page_num=255)
-        To search the whole finger library for a matching template that
-    delete_char(page_id, n)
-        To delete a segment (n) of templates of Flash library
-    empty()
-        to delete all the templates in the Flash library
     """
 
     def __init__(self, port=None):
+        """Initialize class with serial port object
+
+        This sets up the `AdafruitFingerprint` class with the serial
+        `port` object to be used for serial communication. The `port`
+        object is passed down during initialization of the `Package`
+        class from the `core` module (which composes this class) where
+        it is actually used. The implementation of the type of serial
+        object `port` must be is not strict. This is why it is left up
+        to the user to select the type of serial object to be used, as
+        can be seen in the examples section.
+
+        In development, the ``pyserial`` package is used. So the
+        constraints are that the serial port object must implement two
+        (2) methods (a ``read`` and a ``write``); which reads and writes
+        from the serial in and out-buffer of the specified port string
+        used when creating the serial connection, and a property
+        ``in_waiting``; which checks the in-buffer for waiting (buffered)
+        incoming data, as specified in the pyserial docs. We advise you
+        simply go with the pyserial package for 100% compatibility. We
+        refused to be strict on this, by abstracting away the serial
+        connection entirely from the user (to the core module perhaps),
+        this is so as to have similiarities with the actual adafruit
+        fingerprint library implemented in arduino which accepts a
+        serial port connection (a hardware or software serial).
+
+        Parameters
+        __________
+        port : serial.Serial
+            Instance of the Serial class from the serial module. The serial
+            port passed to allow serial communication (Default is None)
+
+        Attributes
+        __________
+        package : core.Package
+            Instance of the `Package` class from the local `core` module
+            that describes the complete format for communicating with the
+            adafruit fingerprint module over serial communication. The
+            format describes and composes, and receives and sends the
+            complete read and raw write packets
+        """
+
         if port is None:
             raise MissingPortException(
                 'No port passed for serial communication')
-        self.port = port
         self.package = Package(port=port)
 
     def vfy_pwd(self):
@@ -80,6 +86,13 @@ class AdafruitFingerprint:
         _______
         int
             Confirmation code (A response object)
+
+        Note
+        ____
+        This has to be the first method to be called on any created
+        instance of this class. It also serves as a checker for proper
+        hardware connections as it first tries to establish
+        communication with the connected module
         """
 
         data = [0x13, 0x0, 0x0, 0x0, 0x0]

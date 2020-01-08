@@ -12,8 +12,6 @@ of the methods of the `AdafruitFingerprint` class implemented in the
 :ref:`interface`
 module are implemeneted here.
 
-`H` here simply means the values are hex values. E.g ``00H`` means
-``0x00``.
 
 .. automodule:: adafruit_fingerprint.responses
     :members:

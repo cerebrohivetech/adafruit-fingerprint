@@ -1,7 +1,7 @@
 .. _interface:
 
-Interface (API)
-===============
+Interface (AdafruitFingerprint API)
+===================================
 
 This is the core interface API documentation. This and the
 :ref:`responses`
@@ -10,3 +10,4 @@ the  ones in :ref:`example_codes`
 
 .. automodule:: adafruit_fingerprint.interface
     :members:
+    :special-members: __init__
