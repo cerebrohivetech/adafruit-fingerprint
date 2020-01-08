@@ -67,7 +67,7 @@ Distributed under the XYZ license. See ``LICENSE`` for more information.
 
 <!-- Markdown links -->
 [finger_sphinx]: https://fingerprint-module-r305-python-and-mysql.readthedocs.io/en/latest/
-[docs - hardware section]: https://adafruit-fingerprint.readthedocs.io/en/latest/index.html
+[docs - hardware section]: https://adafruit-fingerprint.readthedocs.io/en/latest/hardware/index.html
 [Examples Codes]: https://adafruit-fingerprint.readthedocs.io/en/latest/examples/index.html
 [docs]: https://adafruit-fingerprint.readthedocs.io/en/latest/index.html
 [here]: https://github.com/cerebrohivetech/adafruit-fingerprint/raw/master/finger-print-module.pdf
