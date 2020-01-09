@@ -16,3 +16,4 @@ their sample codes using this library
     search_flash_library
     delete
     empty
+    get_template_num_count
