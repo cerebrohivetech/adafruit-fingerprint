@@ -456,7 +456,7 @@ class AdafruitFingerprint:
         raise SerialReadException('No data read from serial port')
 
     def empty(self):
-        """to delete all the templates in the Flash library
+        """To delete all the templates in the Flash library
 
         Raises
         ______
@@ -483,6 +483,44 @@ class AdafruitFingerprint:
                 return FINGERPRINT_PACKETRECEIVER
             elif package_content == FINGERPRINT_TEMPLATECLEARALLFAIL:
                 return FINGERPRINT_TEMPLATECLEARALLFAIL
+            else:
+                raise UnknownConfirmationCodeException(
+                    'Unknown confirmation code')
+        raise SerialReadException('No data read from serial port')
+
+    def template_num(self):
+        """To read the current valid template number of the Module
+
+        Raises
+        ______
+        UnknownConfirmationCodeException
+            if no valid confirmation code is received from module
+        SerialReadException
+            if no serial data can be read from buffer (from module)
+
+        Returns
+        _______
+        Returns
+        _______
+        tuple
+            On success. Confirmation code (A response object),
+            template number count in flash library
+        int
+            On failure. Confirmation code (A response object)
+        """
+
+        data = [0x1d]
+        self.package.write(data=data)
+
+        serial_data = self.package.read()
+        if len(serial_data) > 0:
+            package_content = serial_data[4]
+            if package_content == FINGERPRINT_OK:
+                template_num = hexbyte_2integer_normalizer(
+                    serial_data[5], serial_data[6])
+                return FINGERPRINT_OK, template_num
+            elif package_content == FINGERPRINT_PACKETRECEIVER:
+                return FINGERPRINT_PACKETRECEIVER
             else:
                 raise UnknownConfirmationCodeException(
                     'Unknown confirmation code')
