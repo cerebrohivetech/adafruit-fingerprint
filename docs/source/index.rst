@@ -15,6 +15,7 @@ Other pages (online)
 
     adafruit_fingerprint/index
     examples/index
+    hardware/index
 
 
 Indices and tables
