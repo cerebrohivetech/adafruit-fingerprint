@@ -25,6 +25,8 @@ the only object exposed by the package's `__init__` file.
 
 And the responses can be imported like so
 ``from adafruit_fingerprint.responses import *``.
+You can also decide to import only a particular response like so
+``from adafruit_fingerprint.responses import FINGERPRINT_OK``.
 
 And this is basically all you need from the library to get started.
 See the :ref:`example_codes` section to get an idea of how this works.
