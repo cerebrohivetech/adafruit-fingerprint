@@ -4,7 +4,7 @@
 
 > This library enables you communicate and with the r305 Fingerprint Identification Module via serial connection with upper computer.
 
-The library enables you to  to communicate with the r305 fingerprint module from upper computer (your laptop, a raspberry pi etc), rather than the arduino which it was built for by default. The module communicates via TTL, therefore, to communicate you need a _USB - TTL converter_ connected to the module.
+The library enables you to  to communicate with the r305 fingerprint module from upper computer (your laptop, a raspberry pi etc), rather than the arduino which it was built for by default. The module communicates via TTL, therefore, to communicate you need a ``USB - TTL converter`` connected to the module.
 
 It provides a class that exposes methods you can call to perform serial read/write actions with the module, these methods are implemented according to the datasheet specification, which you can download from the repo [here].
 
@@ -56,14 +56,6 @@ This package is heavily inspired by the [finger_sphinx] project, found during ou
 > Adegoke Joshua – [@iAmCodedebugger](https://twitter.com/iAmCodedebugger) (twitter), [Ade-Joshe](https://github.com/Ade-Joshe/) (github)
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
-
-## Contributing
-
-1. Fork the repo
-2. Create your feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -am 'Add some your-feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Create a new Pull Request
 
 <!-- Markdown links -->
 [finger_sphinx]: https://fingerprint-module-r305-python-and-mysql.readthedocs.io/en/latest/
