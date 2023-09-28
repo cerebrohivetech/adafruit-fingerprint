@@ -57,6 +57,10 @@ This package is heavily inspired by the [finger_sphinx] project, found during ou
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
+## Github Repository
+
+[Github Repository](https://github.com/cerebrohivetech/adafruit-fingerprint)
+
 <!-- Markdown links -->
 [finger_sphinx]: https://fingerprint-module-r305-python-and-mysql.readthedocs.io/en/latest/
 [docs - hardware section]: https://adafruit-fingerprint.readthedocs.io/en/latest/hardware/index.html
