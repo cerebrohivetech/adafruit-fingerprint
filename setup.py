@@ -8,7 +8,7 @@ with open(README, 'r') as readme_file:
 
 setup(
     name='adafruit-fingerprint',
-    version='1.0.0',
+    version='1.0.1',
     packages=find_packages(),
 
     # meta
@@ -23,6 +23,10 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6'
     ],
-    url='https://adafruit-fingerprint.readthedocs.io',
+    url='https://github.com/cerebrohivetech/adafruit-fingerprint',
+    project_urls={
+        'Documentation': 'https://adafruit-fingerprint.readthedocs',
+        'Repository': 'https://github.com/cerebrohivetech/adafruit-fingerprint'
+    }
     install_requires=['pyserial==3.4.0']
 )
