@@ -8,11 +8,11 @@ with open(README, 'r') as readme_file:
 
 setup(
     name='adafruit-fingerprint',
-    version='1.0.1',
+    version='1.0.2',
     packages=find_packages(),
 
     # meta
-    author='Faith Odonghanro, Promise Nwanozie, Adegoke Joshua',
+    author='Faith Odonghanro, Promise Nwanozie, Joshua Adegoke',
     author_email='toriboi.fo@gmail.com',
     description='Interface with the adafruit fingerprint r305 module from upper computer over serial connection',
     long_description_content_type='text/markdown',
@@ -21,7 +21,8 @@ setup(
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.6',
+        'r305'
     ],
     url='https://github.com/cerebrohivetech/adafruit-fingerprint',
     project_urls={

@@ -18,11 +18,11 @@ sys.path.insert(0, os.path.abspath('./../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'adafruit_fingerprint'
-copyright = '2019, Odonghanro Faith, Nwanozie Promise, Adegoke Joshua'
-author = 'Odonghanro Faith, Nwanozie Promise, Adegoke Joshua'
+copyright = '2019, Faith Odonghanro, Promise Nwanozie, Joshua Adegoke'
+author = 'Faith Odonghanro, Promise Nwanozie, Joshua Adegoke'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = '1.0.2'
 
 
 # -- General configuration ---------------------------------------------------
