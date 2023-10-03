@@ -44,6 +44,8 @@ python -m unittest discover tests
 
 * 1.0.0
   * Good enough for most use cases
+* 1.0.2
+  * Added link to github repository
 
 ## Meta
 
