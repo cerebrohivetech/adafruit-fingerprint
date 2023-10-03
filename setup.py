@@ -21,8 +21,7 @@ setup(
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'r305'
+        'Programming Language :: Python :: 3.6'
     ],
     url='https://github.com/cerebrohivetech/adafruit-fingerprint',
     project_urls={
