@@ -25,7 +25,7 @@ setup(
     ],
     url='https://github.com/cerebrohivetech/adafruit-fingerprint',
     project_urls={
-        'Documentation': 'https://adafruit-fingerprint.readthedocs',
+        'Documentation': 'https://adafruit-fingerprint.readthedocs.io',
         'Repository': 'https://github.com/cerebrohivetech/adafruit-fingerprint'
     },
     install_requires=['pyserial==3.4.0']
