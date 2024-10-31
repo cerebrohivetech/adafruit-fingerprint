@@ -8,7 +8,7 @@ with open(README, 'r') as readme_file:
 
 setup(
     name='adafruit-fingerprint',
-    version='1.0.2',
+    version='1.0.3',
     packages=find_packages(),
 
     # meta
