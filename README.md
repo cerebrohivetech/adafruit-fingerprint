@@ -1,6 +1,7 @@
 # adafruit-fingerprint
 
 [![Documentation Status](https://readthedocs.org/projects/adafruit-fingerprint/badge/?version=latest)](https://adafruit-fingerprint.readthedocs.io/en/latest/?badge=latest)
+![PyPI Downloads](https://static.pepy.tech/badge/adafruit-fingerprint)
 
 > This library enables you communicate and with the r305 Fingerprint Identification Module via serial connection with upper computer.
 
